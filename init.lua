@@ -5,7 +5,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -481,7 +481,6 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         -- gopls = {},
-        pyright = {},
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -698,9 +697,14 @@ require('lazy').setup({
     init = function()
       -- Load the colorscheme here.
       vim.cmd.colorscheme 'dracula'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+    -- Set transparency for Neovim
+    vim.cmd [[
+      hi Normal guibg=NONE ctermbg=NONE
+      hi NonText guibg=NONE ctermbg=NONE
+      hi LineNr guibg=NONE ctermbg=NONE
+      hi Folded guibg=NONE ctermbg=NONE
+      hi EndOfBuffer guibg=NONE ctermbg=NONE
+    ]]
     end
   },
 
@@ -792,6 +796,9 @@ require('lazy').setup({
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.42header',
+--   require 'kickstart.plugins.copilot',
+
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
